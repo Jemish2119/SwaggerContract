@@ -1,0 +1,194 @@
+openapi: 3.0.1
+info:
+  title: Claim Management
+  version: 1.0.0
+  description: Api List
+
+paths:
+  /api/Login/{Email}/{Passwprd}:
+    get:
+      summary: User Login with Email & Password in Web
+      parameters:
+        - name: Email
+          in: path
+          required: true
+          schema:
+            type: string
+            example: abc@gmail.com
+        - name: Passwprd
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '********'
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status: 
+                    type: boolean
+                    example: true
+                  Message: 
+                    type: string
+                    example: login successfully....!
+                  Data:
+                    type: array
+                    items: 
+                      type: object
+                      properties: 
+                        UserId: 
+                          type: integer
+                          example: 23
+                        UserName:
+                          type: string
+                          example: Joe
+                        RoleId:
+                          type: integer
+                          example: 2
+                        ProfileImage:
+                          type: string
+                          example: photo.jpeg
+        '404':
+          description: User Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status: 
+                    type: boolean
+                    example: false
+                  Message: 
+                    type: string
+                    example: User not found With this Email And Password
+                  Data:
+                   
+                      type: array
+                      items: {}
+                      example: []
+
+  /api/ForgotPassword/{Email}:
+    post:
+      summary: Forgote password Request With Email
+      parameters:
+        - name: Email
+          in: path
+          required: true
+          schema:
+            type: string
+            example: abc@gmail.com
+        
+      responses:
+        '200':
+          description: Email Sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status: 
+                    type: boolean
+                    example: true
+                  Message: 
+                    type: string
+                    example: Email Sent Successfully...!
+                  Data:
+                    type: array
+                    items: {}
+                    example: []
+                      
+        '404':
+          description: Email Not Exist in Record 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status: 
+                    type: boolean
+                    example: false
+                  Message: 
+                    type: string
+                    example: Email Not Found in record Please Register User
+                  Data:
+                   
+                      type: array
+                      items: {}
+                      example: []                      
+  /api/ResetPassword/{Token}/{Passwprd}:
+    get:
+      summary: User Login with Email & Password in Web
+      parameters:
+        - name: Token
+          in: path
+          required: true
+          schema:
+            type: string
+            example: hgfygfygrfehb34hfh7568cdbh
+        - name: Passwprd
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '********'
+      responses:
+        '200':
+          description: Password Changed
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - type: object
+                    properties: 
+                      status: 
+                        type: boolean
+                        example: true
+                      message: 
+                        type: string
+                        example: Password Changed Successfully...!
+                      data:
+                        type: array
+                        items: {}
+                        example: 
+                  - type: object      
+                    properties: 
+                      status: 
+                        type: boolean
+                        example: false
+                      message: 
+                        type: string
+                        example: Token Has Expires....!
+                      data:
+                        type: array
+                        items: {}
+                        example: []
+        
+                      
+                          
+        '404':
+          description: Invalid Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status: 
+                    type: boolean
+                    example: false
+                  Message: 
+                    type: string
+                    example: Invalid Link For Reset Password....
+                  Data:
+                   
+                      type: array
+                      items: {}
+                      example: []
+                         
+                   
+                                 
+                    
+
